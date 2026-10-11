@@ -110,3 +110,38 @@
     @apply text-[32px] leading-[44px] font-semibold;
   }
 }
+
+/*
+ * Brand theme. The --brand-* variables are set on <html> from brand.json
+ * (see src/lib/brand.ts). They are mapped onto the UI kit's own variables
+ * here, so the whole storefront follows the brand without per-component styling.
+ */
+:root {
+  --bg-base: var(--brand-background);
+  --bg-subtle: var(--brand-surface);
+  --bg-component: var(--brand-surface);
+  --bg-field: var(--brand-surface);
+  --bg-base-hover: var(--brand-surface);
+  --bg-subtle-hover: var(--brand-surface);
+  --fg-base: var(--brand-text);
+  --fg-subtle: var(--brand-muted);
+  --fg-muted: var(--brand-muted);
+  --fg-interactive: var(--brand-accent);
+  --border-base: var(--brand-border);
+  --button-inverted: var(--brand-button);
+  --button-inverted-hover: var(--brand-button);
+  --button-inverted-pressed: var(--brand-button);
+  --fg-on-inverted: var(--brand-button-text);
+}
+
+body {
+  background-color: var(--brand-background);
+  color: var(--brand-text);
+  font-family: var(--brand-font-body);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--brand-font-display);
+}

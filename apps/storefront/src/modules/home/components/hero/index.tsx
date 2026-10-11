@@ -1,31 +1,28 @@
-import { Github } from "@medusajs/icons";
-import { Button, Heading } from "@modules/common/components/ui";
+import { brand } from "@lib/brand"
+import { Button, Heading } from "@modules/common/components/ui"
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
+
 const Hero = () => {
   return (
-    <div className="h-[75vh] w-full border-b border-ui-border-base relative bg-ui-bg-subtle">
-      <div className="absolute inset-0 z-10 flex flex-col justify-center items-center text-center small:p-32 gap-6">
-        <span>
-          <Heading
-            level="h1"
-            className="text-3xl leading-10 text-ui-fg-base font-normal"
-          >
-            Ecommerce Starter Template
-          </Heading>
-          <Heading
-            level="h2"
-            className="text-3xl leading-10 text-ui-fg-subtle font-normal"
-          >
-            Powered by Medusa and Next.js
-          </Heading>
-        </span>
-        <a href="https://github.com/medusajs/dtc-starter" target="_blank">
-          <Button variant="secondary">
-            View on GitHub <Github />
+    <div className="w-full border-b border-ui-border-base bg-ui-bg-subtle">
+      <div className="content-container flex flex-col items-center text-center gap-6 py-24 small:py-32">
+        <Heading
+          level="h1"
+          className="text-4xl small:text-5xl leading-tight text-ui-fg-base font-normal max-w-3xl"
+        >
+          {brand.home.headline}
+        </Heading>
+        <p className="text-large-regular text-ui-fg-subtle max-w-xl">
+          {brand.home.subhead}
+        </p>
+        <LocalizedClientLink href="/store">
+          <Button variant="primary" size="large">
+            {brand.home.cta}
           </Button>
-        </a>
+        </LocalizedClientLink>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Hero;
+export default Hero

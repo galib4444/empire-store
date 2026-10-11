@@ -4,16 +4,24 @@
   "contactEmail": "hello@promptugraphy.com",
   "theme": {
     "colors": {
-      "background": "#1A1612",
-      "text": "#F5F1E8",
-      "muted": "#C9BBA4",
-      "accent": "#C1922F"
+      "background": "#F5F1E8",
+      "surface": "#FBF9F3",
+      "text": "#1A1612",
+      "muted": "#6B5F50",
+      "border": "#C9BBA4",
+      "accent": "#C1922F",
+      "button": "#1A1612",
+      "buttonText": "#F5F1E8"
     },
     "fonts": {
       "display": "Fraunces",
-      "body": "Inter",
-      "mono": "Menlo"
+      "body": "Inter"
     }
+  },
+  "home": {
+    "headline": "Fewer prompts, written properly.",
+    "subhead": "AI prompt systems, written as designed PDF books. Works with ChatGPT, Claude and Gemini.",
+    "cta": "See the books"
   },
   "logo": {
     "icon": "logo/icon.png",
@@ -22,10 +30,15 @@
   "store": {
     "currency": "usd",
     "regionName": "United States",
-    "countries": ["us"]
+    "countries": [
+      "us"
+    ]
   },
   "collections": [
-    { "handle": "the-deliberate-series", "title": "The Deliberate Series" }
+    {
+      "handle": "the-deliberate-series",
+      "title": "The Deliberate Series"
+    }
   ],
   "catalog": [
     {
@@ -35,8 +48,13 @@
       "price": 19.99,
       "status": "published",
       "collection": "the-deliberate-series",
-      "descriptionFrom": { "file": "02-The-Deliberate-Day/listing-copy.md", "heading": "## Description" },
-      "files": ["02-The-Deliberate-Day/product/The-Deliberate-Day-Promptugraphy.pdf"],
+      "descriptionFrom": {
+        "file": "02-The-Deliberate-Day/listing-copy.md",
+        "heading": "## Description"
+      },
+      "files": [
+        "02-The-Deliberate-Day/product/The-Deliberate-Day-Promptugraphy.pdf"
+      ],
       "images": [
         "02-The-Deliberate-Day/listing-images/slot-01.png",
         "02-The-Deliberate-Day/listing-images/slot-02.png",
@@ -49,7 +67,10 @@
         "02-The-Deliberate-Day/listing-images/slot-09.png",
         "02-The-Deliberate-Day/listing-images/slot-10.png"
       ],
-      "metadata": { "prompts": 17, "format": "PDF" }
+      "metadata": {
+        "prompts": 17,
+        "format": "PDF"
+      }
     },
     {
       "handle": "the-deliberate-focus",
@@ -58,8 +79,13 @@
       "price": 19.99,
       "status": "published",
       "collection": "the-deliberate-series",
-      "descriptionFrom": { "file": "03-The-Deliberate-Focus/listing-copy.md", "heading": "## Description" },
-      "files": ["03-The-Deliberate-Focus/product/The-Deliberate-Focus.pdf"],
+      "descriptionFrom": {
+        "file": "03-The-Deliberate-Focus/listing-copy.md",
+        "heading": "## Description"
+      },
+      "files": [
+        "03-The-Deliberate-Focus/product/The-Deliberate-Focus.pdf"
+      ],
       "images": [
         "03-The-Deliberate-Focus/listing-images/slot-01.png",
         "03-The-Deliberate-Focus/listing-images/slot-02.png",
@@ -72,7 +98,10 @@
         "03-The-Deliberate-Focus/listing-images/slot-09.png",
         "03-The-Deliberate-Focus/listing-images/slot-10.png"
       ],
-      "metadata": { "prompts": 24, "format": "PDF" }
+      "metadata": {
+        "prompts": 24,
+        "format": "PDF"
+      }
     },
     {
       "handle": "the-deliberate-night",
@@ -81,9 +110,14 @@
       "price": 19.99,
       "status": "draft",
       "collection": "the-deliberate-series",
-      "files": ["04-The-Deliberate-Night/product/The-Deliberate-Night.pdf"],
+      "files": [
+        "04-The-Deliberate-Night/product/The-Deliberate-Night.pdf"
+      ],
       "images": [],
-      "metadata": { "prompts": 21, "format": "PDF" }
+      "metadata": {
+        "prompts": 21,
+        "format": "PDF"
+      }
     },
     {
       "handle": "the-kings-hand",
@@ -91,9 +125,14 @@
       "subtitle": "A second brain for the conversations that decide your life",
       "price": 29.99,
       "status": "draft",
-      "files": ["01-The-Kings-Hand/product/The_Kings_Hand_COMPLETE.pdf"],
+      "files": [
+        "01-The-Kings-Hand/product/The_Kings_Hand_COMPLETE.pdf"
+      ],
       "images": [],
-      "metadata": { "prompts": 21, "format": "PDF" }
+      "metadata": {
+        "prompts": 21,
+        "format": "PDF"
+      }
     },
     {
       "handle": "the-freelancers-desk",
@@ -101,9 +140,14 @@
       "subtitle": "Client communication for solo creatives",
       "price": 19.99,
       "status": "draft",
-      "files": ["05-The-Freelancers-Desk/product/The-Freelancers-Desk.pdf"],
+      "files": [
+        "05-The-Freelancers-Desk/product/The-Freelancers-Desk.pdf"
+      ],
       "images": [],
-      "metadata": { "prompts": 22, "format": "PDF" }
+      "metadata": {
+        "prompts": 22,
+        "format": "PDF"
+      }
     },
     {
       "handle": "the-deliberate-series-bundle",
@@ -118,7 +162,10 @@
         "04-The-Deliberate-Night/product/The-Deliberate-Night.pdf"
       ],
       "images": [],
-      "metadata": { "prompts": 62, "format": "PDF" }
+      "metadata": {
+        "prompts": 62,
+        "format": "PDF"
+      }
     }
   ]
 }
