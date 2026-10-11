@@ -1,5 +1,6 @@
 "use client"
 
+import { shippingStepDone } from "@lib/util/cart-needs-shipping"
 import { Heading, Text, clx } from "@modules/common/components/ui"
 
 import PaymentButton from "../payment-button"
@@ -17,7 +18,7 @@ const Review = ({ cart }: { cart: HttpTypes.StoreCart }) => {
 
   const previousStepsCompleted =
     cart.shipping_address &&
-    (cart.shipping_methods?.length ?? 0) > 0 &&
+    shippingStepDone(cart) &&
     (cart.payment_collection || paidByGiftcard)
 
   return (

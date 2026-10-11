@@ -15,6 +15,7 @@ import {
 } from "./cookies"
 import { getRegion } from "./regions"
 import { getLocale } from "./locale-actions"
+import { cartNeedsShipping } from "@lib/util/cart-needs-shipping"
 
 /**
  * Retrieves a cart by its ID. If no ID is provided, it will use the cart ID from the cookies.
@@ -335,6 +336,7 @@ export async function submitPromotionForm(
 
 // TODO: Pass a POJO instead of a form entity here
 export async function setAddresses(currentState: unknown, formData: FormData) {
+  let nextStep = "delivery"
   try {
     if (!formData) {
       throw new Error("No form data found when setting addresses")
@@ -377,12 +379,13 @@ export async function setAddresses(currentState: unknown, formData: FormData) {
         phone: formData.get("billing_address.phone"),
       }
     await updateCart(data)
+    nextStep = cartNeedsShipping(await retrieveCart()) ? "delivery" : "payment"
   } catch (e: any) {
     return e.message
   }
 
   redirect(
-    `/${formData.get("shipping_address.country_code")}/checkout?step=delivery`
+    `/${formData.get("shipping_address.country_code")}/checkout?step=${nextStep}`
   )
 }
 

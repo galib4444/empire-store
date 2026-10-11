@@ -1,5 +1,6 @@
 "use client"
 
+import { shippingStepDone } from "@lib/util/cart-needs-shipping"
 import { isManual, isStripeLike } from "@lib/constants"
 import { placeOrder } from "@lib/data/cart"
 import { HttpTypes } from "@medusajs/types"
@@ -23,7 +24,7 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({
     !cart.shipping_address ||
     !cart.billing_address ||
     !cart.email ||
-    (cart.shipping_methods?.length ?? 0) < 1
+    !shippingStepDone(cart)
 
   const paymentSession = cart.payment_collection?.payment_sessions?.[0]
 

@@ -1,4 +1,5 @@
 "use client"
+import { cartNeedsShipping } from "@lib/util/cart-needs-shipping"
 import { setAddresses } from "@lib/data/cart"
 import useToggleState from "@lib/hooks/use-toggle-state"
 import compareAddresses from "@lib/util/compare-addresses"
@@ -84,7 +85,7 @@ const Addresses = ({
               </div>
             )}
             <SubmitButton className="mt-6" data-testid="submit-address-button">
-              Continue to delivery
+              {cartNeedsShipping(cart) ? "Continue to delivery" : "Continue to payment"}
             </SubmitButton>
             <ErrorMessage error={message} data-testid="address-error-message" />
           </div>

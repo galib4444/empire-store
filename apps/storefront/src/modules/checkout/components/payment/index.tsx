@@ -1,4 +1,5 @@
 "use client"
+import { shippingStepDone } from "@lib/util/cart-needs-shipping"
 import { RadioGroup } from "@headlessui/react"
 import { isStripeLike, paymentInfoMap } from "@lib/constants"
 import { initiatePaymentSession } from "@lib/data/cart"
@@ -58,7 +59,7 @@ const Payment = ({
   )
 
   const paymentReady =
-    (activeSession && (cart?.shipping_methods?.length ?? 0) !== 0) || paidByGiftcard
+    (activeSession && shippingStepDone(cart)) || paidByGiftcard
 
   const createQueryString = useCallback(
     (name: string, value: string) => {

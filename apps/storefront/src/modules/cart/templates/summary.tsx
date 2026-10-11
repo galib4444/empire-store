@@ -1,5 +1,6 @@
 "use client"
 
+import { shippingStepDone } from "@lib/util/cart-needs-shipping"
 import { Button, Heading } from "@modules/common/components/ui"
 
 import CartTotals from "@modules/common/components/cart-totals"
@@ -15,7 +16,7 @@ type SummaryProps = {
 function getCheckoutStep(cart: HttpTypes.StoreCart) {
   if (!cart?.shipping_address?.address_1 || !cart.email) {
     return "address"
-  } else if (cart?.shipping_methods?.length === 0) {
+  } else if (!shippingStepDone(cart)) {
     return "delivery"
   } else {
     return "payment"
