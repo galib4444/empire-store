@@ -31,6 +31,11 @@ export const GET = async (
   })
 }
 
+/** Upload keys look like "private-1712345678901-My-File.pdf". */
+function fileNameFromKey(key: string): string {
+  return key.replace(/^(private-)?\d+-/, "")
+}
+
 type CreateRequestBody = z.infer<
   typeof createDigitalProductsSchema
 >
@@ -39,11 +44,6 @@ export const POST = async (
   req: AuthenticatedMedusaRequest<CreateRequestBody>,
   res: MedusaResponse
 ) => {
-  const query = req.scope.resolve(ContainerRegistrationKeys.QUERY)
-  const { data: [shippingProfile] } = await query.graph({
-    entity: "shipping_profile",
-    fields: ["id"],
-  })
   const { result } = await createDigitalProductWorkflow(
     req.scope
   ).run({
@@ -53,13 +53,12 @@ export const POST = async (
         medias: req.validatedBody.medias.map((media) => ({
           fileId: media.file_id,
           mimeType: media.mime_type,
-          type: media.type
+          type: media.type,
+          filename: media.filename ?? fileNameFromKey(media.file_id),
         })) as Omit<CreateDigitalProductMediaInput, "digital_product_id">[]
       },
-      product: {
-        ...(req.validatedBody.product as unknown as CreateProductWorkflowInputDTO),
-        shipping_profile_id: shippingProfile.id,
-      }
+      // No shipping profile: digital products skip the delivery step at checkout.
+      product: req.validatedBody.product as unknown as CreateProductWorkflowInputDTO,
     }
   })
 

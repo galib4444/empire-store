@@ -54,7 +54,8 @@ To restyle the storefront, change `theme` in `brand.json`. The colors and fonts 
 
 ## Not done yet
 
-- Stripe payments (the store currently uses Medusa's built-in manual payment for testing)
+- Stripe payments (the store currently uses Medusa's built-in manual payment for testing). When adding Stripe, set it to capture payment immediately; otherwise payments stay "authorized" while the buyer already has the file.
+- Orders show "Not fulfilled" in the admin even after the download email goes out. Delivery is tracked in `digital_product_order.status` (`sent` once emailed) but not shown on the order page yet.
 - Real email sending (emails are logged to the console)
 - Production file storage (an S3-compatible bucket)
 - CRM extras: customer notes, tags, timeline

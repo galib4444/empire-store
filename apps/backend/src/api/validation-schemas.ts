@@ -9,7 +9,8 @@ export const createDigitalProductsSchema = z.object({
   medias: z.array(z.object({
     type: z.enum(MediaType),
     file_id: z.string(),
-    mime_type: z.string()
+    mime_type: z.string(),
+    filename: z.string().optional()
   })),
   product: AdminCreateProduct()
 })

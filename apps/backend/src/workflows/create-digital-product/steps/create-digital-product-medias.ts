@@ -10,6 +10,7 @@ export type CreateDigitalProductMediaInput = {
   type: MediaType
   fileId: string
   mimeType: string
+  filename?: string
   digital_product_id: string
 }
 
