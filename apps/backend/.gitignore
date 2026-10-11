@@ -23,5 +23,8 @@ build
 !.yarn/sdks
 !.yarn/versions
 
-.medusa/static
+.medusa
+
+# Uploaded files: product images and the private files buyers download
+/static
 /private

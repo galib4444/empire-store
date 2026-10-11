@@ -1,0 +1,124 @@
+{
+  "name": "Promptugraphy",
+  "tagline": "Fewer prompts, written properly.",
+  "contactEmail": "hello@promptugraphy.com",
+  "theme": {
+    "colors": {
+      "background": "#1A1612",
+      "text": "#F5F1E8",
+      "muted": "#C9BBA4",
+      "accent": "#C1922F"
+    },
+    "fonts": {
+      "display": "Fraunces",
+      "body": "Inter",
+      "mono": "Menlo"
+    }
+  },
+  "logo": {
+    "icon": "logo/icon.png",
+    "favicon": "logo/favicon.png"
+  },
+  "store": {
+    "currency": "usd",
+    "regionName": "United States",
+    "countries": ["us"]
+  },
+  "collections": [
+    { "handle": "the-deliberate-series", "title": "The Deliberate Series" }
+  ],
+  "catalog": [
+    {
+      "handle": "the-deliberate-day",
+      "title": "The Deliberate Day",
+      "subtitle": "An operating system for the hours that are actually yours",
+      "price": 19.99,
+      "status": "published",
+      "collection": "the-deliberate-series",
+      "descriptionFrom": { "file": "02-The-Deliberate-Day/listing-copy.md", "heading": "## Description" },
+      "files": ["02-The-Deliberate-Day/product/The-Deliberate-Day-Promptugraphy.pdf"],
+      "images": [
+        "02-The-Deliberate-Day/listing-images/slot-01.png",
+        "02-The-Deliberate-Day/listing-images/slot-02.png",
+        "02-The-Deliberate-Day/listing-images/slot-03.png",
+        "02-The-Deliberate-Day/listing-images/slot-04.png",
+        "02-The-Deliberate-Day/listing-images/slot-05.png",
+        "02-The-Deliberate-Day/listing-images/slot-06.png",
+        "02-The-Deliberate-Day/listing-images/slot-07.png",
+        "02-The-Deliberate-Day/listing-images/slot-08.png",
+        "02-The-Deliberate-Day/listing-images/slot-09.png",
+        "02-The-Deliberate-Day/listing-images/slot-10.png"
+      ],
+      "metadata": { "prompts": 17, "format": "PDF" }
+    },
+    {
+      "handle": "the-deliberate-focus",
+      "title": "The Deliberate Focus",
+      "subtitle": "A Premium AI Focus System",
+      "price": 19.99,
+      "status": "published",
+      "collection": "the-deliberate-series",
+      "descriptionFrom": { "file": "03-The-Deliberate-Focus/listing-copy.md", "heading": "## Description" },
+      "files": ["03-The-Deliberate-Focus/product/The-Deliberate-Focus.pdf"],
+      "images": [
+        "03-The-Deliberate-Focus/listing-images/slot-01.png",
+        "03-The-Deliberate-Focus/listing-images/slot-02.png",
+        "03-The-Deliberate-Focus/listing-images/slot-03.png",
+        "03-The-Deliberate-Focus/listing-images/slot-04.png",
+        "03-The-Deliberate-Focus/listing-images/slot-05.png",
+        "03-The-Deliberate-Focus/listing-images/slot-06.png",
+        "03-The-Deliberate-Focus/listing-images/slot-07.png",
+        "03-The-Deliberate-Focus/listing-images/slot-08.png",
+        "03-The-Deliberate-Focus/listing-images/slot-09.png",
+        "03-The-Deliberate-Focus/listing-images/slot-10.png"
+      ],
+      "metadata": { "prompts": 24, "format": "PDF" }
+    },
+    {
+      "handle": "the-deliberate-night",
+      "title": "The Deliberate Night",
+      "subtitle": "A Premium AI Evening & Sleep System",
+      "price": 19.99,
+      "status": "draft",
+      "collection": "the-deliberate-series",
+      "files": ["04-The-Deliberate-Night/product/The-Deliberate-Night.pdf"],
+      "images": [],
+      "metadata": { "prompts": 21, "format": "PDF" }
+    },
+    {
+      "handle": "the-kings-hand",
+      "title": "The King's Hand",
+      "subtitle": "A second brain for the conversations that decide your life",
+      "price": 29.99,
+      "status": "draft",
+      "files": ["01-The-Kings-Hand/product/The_Kings_Hand_COMPLETE.pdf"],
+      "images": [],
+      "metadata": { "prompts": 21, "format": "PDF" }
+    },
+    {
+      "handle": "the-freelancers-desk",
+      "title": "The Freelancer's Desk",
+      "subtitle": "Client communication for solo creatives",
+      "price": 19.99,
+      "status": "draft",
+      "files": ["05-The-Freelancers-Desk/product/The-Freelancers-Desk.pdf"],
+      "images": [],
+      "metadata": { "prompts": 22, "format": "PDF" }
+    },
+    {
+      "handle": "the-deliberate-series-bundle",
+      "title": "The Deliberate Series",
+      "subtitle": "Day, Focus and Night together",
+      "price": 49.99,
+      "status": "draft",
+      "collection": "the-deliberate-series",
+      "files": [
+        "02-The-Deliberate-Day/product/The-Deliberate-Day-Promptugraphy.pdf",
+        "03-The-Deliberate-Focus/product/The-Deliberate-Focus.pdf",
+        "04-The-Deliberate-Night/product/The-Deliberate-Night.pdf"
+      ],
+      "images": [],
+      "metadata": { "prompts": 62, "format": "PDF" }
+    }
+  ]
+}

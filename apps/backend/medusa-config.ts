@@ -2,6 +2,8 @@ import { loadEnv, defineConfig } from "@medusajs/framework/utils"
 
 loadEnv(process.env.NODE_ENV || "development", process.cwd())
 
+const BACKEND_URL = process.env.MEDUSA_BACKEND_URL || "http://localhost:9000"
+
 module.exports = defineConfig({
   projectConfig: {
     databaseUrl: process.env.DATABASE_URL,
@@ -16,6 +18,24 @@ module.exports = defineConfig({
   modules: [
     {
       resolve: "./src/modules/digital-product",
+    },
+    {
+      resolve: "@medusajs/medusa/file",
+      options: {
+        providers: [
+          {
+            // Development storage. Buyer files go to `private/`, which is not
+            // served over HTTP; they are only streamed by the download route.
+            resolve: "@medusajs/medusa/file-local",
+            id: "local",
+            options: {
+              upload_dir: "static",
+              private_upload_dir: "private",
+              backend_url: `${BACKEND_URL}/static`,
+            },
+          },
+        ],
+      },
     },
     {
       resolve: "@medusajs/medusa/fulfillment",
