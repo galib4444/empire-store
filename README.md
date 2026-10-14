@@ -66,6 +66,18 @@ pnpm run dev
 
 Shop: <http://localhost:8000/us>. Admin: <http://localhost:9000/app>.
 
+## Your seller dashboard
+
+Open <http://localhost:9000/app> and sign in with your Medusa admin account. The customer website and the seller dashboard have separate addresses and logins.
+
+- **Store overview** (<http://localhost:9000/app/store-overview>): orders, revenue, customer/product counts, and integration status.
+- **Products / Digital products**: manage the catalog and upload downloadable files.
+- **Orders**: manage payments, refunds, fulfillment, and the digital delivery widget's resend action.
+- **Customers**: open a customer to see private notes, tags, lifetime spend, and their timeline.
+- **Promotions**: manage launch and subscriber discounts.
+
+## Local test payments
+
 In development, manual payment is authorized at checkout. Capture the test payment in the admin before expecting a download; authorization alone grants no file access.
 
 ## Enable payments and email

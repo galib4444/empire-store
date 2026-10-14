@@ -26,7 +26,8 @@ export default function RootLayout(props: { children: React.ReactNode }) {
         />
         <link rel="stylesheet" href={brandFontsUrl()} />
       </head>
-      <body>
+      {/* Browser extensions such as Grammarly add attributes to the body before hydration. */}
+      <body suppressHydrationWarning>
         <main className="relative">{props.children}</main>
       </body>
     </html>
