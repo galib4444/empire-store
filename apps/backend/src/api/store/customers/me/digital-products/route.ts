@@ -1,6 +1,7 @@
 import { AuthenticatedMedusaRequest, MedusaResponse } from "@medusajs/framework"
 import { ContainerRegistrationKeys } from "@medusajs/framework/utils"
 import { buildLibrary } from "../../../../../modules/digital-product/lib/library"
+import { canDownloadOrder, paymentFields } from "../../../../../modules/digital-product/lib/paid-order"
 
 /** The signed-in customer's library: every digital product they own. */
 export const GET = async (
@@ -14,7 +15,7 @@ export const GET = async (
   } = await query.graph({
     entity: "customer",
     fields: [
-      "orders.status",
+      ...paymentFields.map((field) => `orders.${field}`),
       "orders.digital_product_order.id",
       "orders.digital_product_order.products.id",
       "orders.digital_product_order.products.name",
@@ -24,7 +25,7 @@ export const GET = async (
   })
 
   const digitalOrders = (customer?.orders ?? [])
-    .filter((order) => order?.status !== "canceled")
+    .filter((order) => canDownloadOrder(order))
     .map((order) => order?.digital_product_order)
 
   res.json({ digital_products: buildLibrary(digitalOrders as any) })

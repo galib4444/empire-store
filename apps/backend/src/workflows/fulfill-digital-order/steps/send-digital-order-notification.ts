@@ -8,6 +8,7 @@ import {
 } from "../../../modules/digital-product/types"
 import { DIGITAL_PRODUCT_MODULE } from "../../../modules/digital-product"
 import DigitalProductModuleService from "../../../modules/digital-product/service"
+import { loadBrand } from "../../../lib/brand"
 import {
   createDownloadToken,
   downloadUrl,
@@ -16,6 +17,7 @@ import {
 
 export type SendDigitalOrderNotificationStepInput = {
   digital_product_order: DigitalProductOrder
+  resend_key?: string
 }
 
 export const sendDigitalOrderNotificationStep = createStep(
@@ -23,6 +25,7 @@ export const sendDigitalOrderNotificationStep = createStep(
   async (
     {
       digital_product_order: digitalProductOrder,
+      resend_key,
     }: SendDigitalOrderNotificationStepInput,
     { container }
   ) => {
@@ -58,11 +61,16 @@ export const sendDigitalOrderNotificationStep = createStep(
         })),
     }))
 
-    const notification = await notificationModuleService.createNotifications({
+    const key = `downloads:${digitalProductOrder.id}:${resend_key || "initial"}`
+    const [alreadySent] = await notificationModuleService.listNotifications({ idempotency_key: key, status: "success" } as any)
+    const notification = alreadySent || await notificationModuleService.createNotifications({
       to: digitalProductOrder.order.email,
       template: "digital-order-template",
       channel: "email",
+      idempotency_key: key,
+      provider_data: { idempotency_key: key },
       data: {
+        brand_name: loadBrand().name,
         order_display_id: (digitalProductOrder.order as any).display_id,
         link_valid_days: Math.round(EMAIL_LINK_TTL_SECONDS / 86400),
         products,

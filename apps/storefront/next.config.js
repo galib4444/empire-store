@@ -37,6 +37,7 @@ const S3_PATHNAME = process.env.MEDUSA_CLOUD_S3_PATHNAME
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
+  turbopack: { root: path.resolve(__dirname, "../..") },
   reactStrictMode: true,
   env: {
     NEXT_PUBLIC_BRAND: JSON.stringify({
@@ -57,12 +58,6 @@ const nextConfig = {
     fetches: {
       fullUrl: true,
     },
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
   },
   images: {
     unoptimized: true,

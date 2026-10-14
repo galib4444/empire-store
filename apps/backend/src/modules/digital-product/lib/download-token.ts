@@ -44,8 +44,8 @@ export function createDownloadToken(
 
 /** Returns the payload, or null when the token is malformed, forged or expired. */
 export function verifyDownloadToken(token: string): DownloadTokenPayload | null {
-  const [body, signature] = token.split(".")
-  if (!body || !signature) {
+  const [body, signature, extra] = token.split(".")
+  if (!body || !signature || extra !== undefined || token.length > 4096) {
     return null
   }
   const expected = Buffer.from(sign(body))
@@ -57,10 +57,10 @@ export function verifyDownloadToken(token: string): DownloadTokenPayload | null 
     const payload = JSON.parse(
       Buffer.from(body, "base64url").toString("utf8")
     ) as DownloadTokenPayload
-    if (!payload.dpo || !payload.media || typeof payload.exp !== "number") {
+    if (typeof payload.dpo !== "string" || !payload.dpo || typeof payload.media !== "string" || !payload.media || !Number.isFinite(payload.exp)) {
       return null
     }
-    if (payload.exp < Math.floor(Date.now() / 1000)) {
+    if (payload.exp <= Math.floor(Date.now() / 1000)) {
       return null
     }
     return payload

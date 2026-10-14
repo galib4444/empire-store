@@ -1,12 +1,14 @@
 import { loadEnv, defineConfig } from "@medusajs/framework/utils"
+import { integrationConfig } from "./src/lib/runtime-config"
 
 loadEnv(process.env.NODE_ENV || "development", process.cwd())
 
-const BACKEND_URL = process.env.MEDUSA_BACKEND_URL || "http://localhost:9000"
+const integrations = integrationConfig(process.env)
 
 module.exports = defineConfig({
   projectConfig: {
     databaseUrl: process.env.DATABASE_URL,
+    redisUrl: process.env.REDIS_URL,
     http: {
       storeCors: process.env.STORE_CORS!,
       adminCors: process.env.ADMIN_CORS!,
@@ -16,25 +18,19 @@ module.exports = defineConfig({
     },
   },
   modules: [
+    ...(process.env.REDIS_URL ? [
+      { resolve: "@medusajs/medusa/event-bus-redis", options: { redisUrl: process.env.REDIS_URL } },
+      { resolve: "@medusajs/medusa/workflow-engine-redis", options: { redis: { redisUrl: process.env.REDIS_URL } } },
+      { resolve: "@medusajs/medusa/locking", options: { providers: [{ resolve: "@medusajs/medusa/locking-redis", id: "redis", is_default: true, options: { redisUrl: process.env.REDIS_URL } }] } },
+    ] : []),
+    { resolve: "./src/modules/crm" },
     {
       resolve: "./src/modules/digital-product",
     },
     {
       resolve: "@medusajs/medusa/file",
       options: {
-        providers: [
-          {
-            // Development storage. Buyer files go to `private/`, which is not
-            // served over HTTP; they are only streamed by the download route.
-            resolve: "@medusajs/medusa/file-local",
-            id: "local",
-            options: {
-              upload_dir: "static",
-              private_upload_dir: "private",
-              backend_url: `${BACKEND_URL}/static`,
-            },
-          },
-        ],
+        providers: [integrations.file],
       },
     },
     {
@@ -55,17 +51,12 @@ module.exports = defineConfig({
     {
       resolve: "@medusajs/medusa/notification",
       options: {
-        providers: [
-          {
-            // Logs emails to the console. Swapped for a real provider at launch.
-            resolve: "@medusajs/medusa/notification-local",
-            id: "local",
-            options: {
-              channels: ["email"],
-            },
-          },
-        ],
+        providers: [integrations.notification],
       },
     },
+    ...(integrations.stripe ? [{
+      resolve: "@medusajs/medusa/payment",
+      options: { providers: [integrations.stripe] },
+    }] : []),
   ],
 })

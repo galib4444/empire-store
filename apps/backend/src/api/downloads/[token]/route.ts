@@ -4,10 +4,10 @@ import {
   MedusaError,
   Modules,
 } from "@medusajs/framework/utils"
-import { DIGITAL_PRODUCT_MODULE } from "../../../modules/digital-product"
-import DigitalProductModuleService from "../../../modules/digital-product/service"
+import { logDigitalDownloadWorkflow } from "../../../workflows/log-digital-download"
 import { MediaType } from "../../../modules/digital-product/types"
 import { verifyDownloadToken } from "../../../modules/digital-product/lib/download-token"
+import { canDownloadOrder, paymentFields } from "../../../modules/digital-product/lib/paid-order"
 
 /**
  * Streams a purchased file. The token in the URL is signed and expiring, and
@@ -28,7 +28,7 @@ export const GET = async (req: MedusaRequest, res: MedusaResponse) => {
     data: [digitalProductOrder],
   } = await query.graph({
     entity: "digital_product_order",
-    fields: ["id", "order.status", "products.medias.*"],
+    fields: ["id", ...paymentFields.map((field) => `order.${field}`), "products.medias.*"],
     filters: { id: payload.dpo },
   })
 
@@ -36,7 +36,7 @@ export const GET = async (req: MedusaRequest, res: MedusaResponse) => {
     ?.flatMap((product) => product?.medias ?? [])
     .find((m) => m?.id === payload.media && m?.type === MediaType.MAIN)
 
-  if (!media || digitalProductOrder.order?.status === "canceled") {
+  if (!media || !canDownloadOrder(digitalProductOrder?.order)) {
     throw new MedusaError(
       MedusaError.Types.NOT_ALLOWED,
       "This download link is invalid or has expired."
@@ -46,13 +46,11 @@ export const GET = async (req: MedusaRequest, res: MedusaResponse) => {
   const fileModuleService = req.scope.resolve(Modules.FILE)
   const stream = await fileModuleService.getDownloadStream(media.fileId)
 
-  const digitalProductModuleService: DigitalProductModuleService =
-    req.scope.resolve(DIGITAL_PRODUCT_MODULE)
-  await digitalProductModuleService.createDigitalProductDownloads({
+  await logDigitalDownloadWorkflow(req.scope).run({ input: {
     media_id: media.id,
     digital_product_order_id: digitalProductOrder.id,
     version: media.version,
-  })
+  } })
 
   const filename = (media.filename || "download").replace(/[^\w.\- ]/g, "_")
   res.setHeader("Content-Type", media.mimeType || "application/octet-stream")

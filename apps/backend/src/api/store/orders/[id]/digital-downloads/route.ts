@@ -1,6 +1,7 @@
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework"
 import { ContainerRegistrationKeys } from "@medusajs/framework/utils"
 import { buildLibrary } from "../../../../../modules/digital-product/lib/library"
+import { canDownloadOrder, paymentFields } from "../../../../../modules/digital-product/lib/paid-order"
 
 /**
  * Download links for one order, for the order confirmation page. Like
@@ -15,7 +16,7 @@ export const GET = async (req: MedusaRequest, res: MedusaResponse) => {
   } = await query.graph({
     entity: "order",
     fields: [
-      "status",
+      ...paymentFields,
       "digital_product_order.id",
       "digital_product_order.products.id",
       "digital_product_order.products.name",
@@ -25,7 +26,7 @@ export const GET = async (req: MedusaRequest, res: MedusaResponse) => {
   })
 
   const owned =
-    order && order.status !== "canceled" ? [order.digital_product_order] : []
+    canDownloadOrder(order) ? [order.digital_product_order] : []
 
   res.json({ digital_products: buildLibrary(owned as any) })
 }

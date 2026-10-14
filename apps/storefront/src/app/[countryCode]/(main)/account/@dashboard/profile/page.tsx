@@ -8,6 +8,7 @@ import ProfileName from "@modules/account/components/profile-name"
 import { notFound } from "next/navigation"
 import { listRegions } from "@lib/data/regions"
 import { retrieveCustomer } from "@lib/data/customer"
+import NewsletterPreference from "@modules/account/components/newsletter-preference"
 
 export const metadata: Metadata = {
   title: "Profile",
@@ -42,6 +43,8 @@ export default async function Profile() {
         {/* <ProfilePassword customer={customer} />
         <Divider /> */}
         <ProfileBillingAddress customer={customer} regions={regions} />
+        <Divider />
+        <NewsletterPreference />
       </div>
     </div>
   )
