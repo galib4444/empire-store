@@ -9,6 +9,12 @@
   "redirects": [
     {
       "source": "/:path*",
+      "has": [{ "type": "host", "value": "promptugraphy.vercel.app" }],
+      "destination": "https://promptugraphy.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
       "has": [{ "type": "host", "value": "www.promptugraphy.com" }],
       "destination": "https://promptugraphy.com/:path*",
       "permanent": true
