@@ -14,7 +14,7 @@ node scripts/serve.mjs
 
 Preview: http://127.0.0.1:4187
 
-There are no package dependencies. Source content and shared page templates live in `scripts/build.mjs`; `samples.json` contains only the two selected public sample prompts. Styles, interactions, and optimized public artwork are in `assets/`. The build creates the ignored `dist/` directory.
+There are no package dependencies. Source content and shared page templates live in `scripts/build.mjs`; `samples.json` contains only the two selected public sample prompts. Styles, interactions, optimized public artwork, and the Day/Focus book-opening videos are in `assets/`. Videos use H.264 MP4 with fast-start metadata, retain their original frame rates, and load only when the visitor plays them. Product pages show each video alongside the purchase information; catalog cards offer expandable previews. The build creates the ignored `dist/` directory.
 
 The link check verifies page headings, internal links, assets, anchors, metadata, structured data, purchase destinations, and the absence of paid PDFs and environment files from public output.
 

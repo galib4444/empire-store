@@ -17,9 +17,11 @@ for (const file of htmlFiles) {
   assert.ok(!/localhost|127\.0\.0\.1|\[YOUR NAME|TODO|undefined/.test(html), `${name}: placeholder or local URL`)
   const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1])
   assert.equal(new Set(ids).size, ids.length, `${name}: duplicate IDs`)
-  for (const [, src] of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
+  for (const [, src] of html.matchAll(/(?:href|src|poster)="([^"]+)"/g)) {
     if (/^(https?:|mailto:)/.test(src)) continue
-    const [urlPath, hash] = src.split("#")
+    const parsed = new URL(src, "https://promptugraphy.local")
+    const urlPath = src.startsWith("#") ? "" : parsed.pathname
+    const hash = decodeURIComponent(parsed.hash.slice(1))
     const target = !urlPath ? file : path.join(root, urlPath === "/" ? "index.html" : path.extname(urlPath) ? urlPath : `${urlPath}.html`)
     await fs.access(target).catch(() => assert.fail(`${name}: broken link ${src}`))
     if (hash) {
